@@ -1,0 +1,14 @@
+# Run squid-deb-proxy somewhere
+# docker run --name squid-deb-proxy --restart on-failure:3 -v /srv/docker/squid-deb-proxy:/cachedir -p 3134:8000 tinodidriksen/squid-deb-proxy
+
+# copy this snippet to your Dockerfile
+# -----8<----------8<----------8<----------8<---------
+# local apt/deb proxy for builds
+ARG APT_PROXY=
+RUN [ -n "${APT_PROXY}" ] \
+  && printf 'Acquire::http::Proxy "%s";' "${APT_PROXY}" \
+  > /etc/apt/apt.conf.d/30proxy
+# -----8<----------8<----------8<----------8<---------
+# 
+# Run your builds with
+# --build-arg APT_PROXY=http://IP.OF.squid-deb-proxy:3134/
