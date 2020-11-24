@@ -5,9 +5,9 @@
 # -----8<----------8<----------8<----------8<---------
 # local apt/deb proxy for builds
 ARG APT_PROXY=
-RUN [ -n "${APT_PROXY}" ] \
-  && printf 'Acquire::http::Proxy "%s";' "${APT_PROXY}" \
-  > /etc/apt/apt.conf.d/30proxy
+RUN if [ -n "${APT_PROXY}" ] ; then \
+  printf 'Acquire::http::Proxy "%s";' "${APT_PROXY}" \
+  > /etc/apt/apt.conf.d/30proxy ; fi
 # -----8<----------8<----------8<----------8<---------
 # 
 # Run your builds with
