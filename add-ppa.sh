@@ -8,8 +8,8 @@
 set -euo pipefail
 
 LAUNCHPAD_PPA_API='https://launchpad.net/api/devel/%s/+archive/%s'
-DEB_LINE="deb http://ppa.launchpad.net/%s/%s/%s %s main" #${owner} ${ppa_path} $codename 
-SOURCE_FILENAME="/etc/apt/sources.list.d/%s-%s-%s-%s.list" #${owner} ${ppa_path}  $codename 
+DEB_LINE="deb http://ppa.launchpad.net/%s/%s/%s %s main" #$owner $ppa_name $distro $codename 
+SOURCE_FILENAME="/etc/apt/sources.list.d/%s-%s-%s-%s.list" #$owner $distro $ppa_name $codename 
 version_codename="$(sed -ne '/^VERSION_CODENAME=\(.*\)$/ s//\1/p' /etc/os-release)"
 distro="$(sed -ne '/^ID=\(.*\)$/ s//\1/p' /etc/os-release)"
 declare -a ppa_path_objs ppa_path_arr
